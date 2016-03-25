@@ -4,6 +4,10 @@ createTickets = function(startDate, days, numberOfTickets) {
   for (var i = 0; i < numberOfTickets; i++) {
     var createdAt = new Date(startDate);
     createdAt.setDate(createdAt.getDate() - Math.floor(Math.random() * days));
+    createdAt.setHours(0);
+    createdAt.setMinutes(0);
+    createdAt.setSeconds(0);
+    createdAt.setMilliseconds(0);
     var total = Math.floor(Math.random() * 20) * 10;
     var invoiceNumber = Session.get('invoiceNumber');
     Session.set('invoiceNumber', Session.get('invoiceNumber') + 1);

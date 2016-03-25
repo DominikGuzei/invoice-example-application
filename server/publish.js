@@ -2,8 +2,6 @@ Meteor.publish('invoices', function(date, days) {
   var start = getDateDayCeiling(date);
   if (days > 0) {
     var stop = getDateDayCeiling(date, days);
-    console.log(start);
-    console.log(stop);
     return InvoiceTicketsCollection.find({
       createdAt: {
         $gte: stop,
