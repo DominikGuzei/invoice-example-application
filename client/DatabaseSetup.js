@@ -7,7 +7,7 @@ createTickets = function(startDate, days, numberOfTickets) {
     var total = Math.floor(Math.random() * 20) * 10;
     var invoiceNumber = Session.get('invoiceNumber');
     Session.set('invoiceNumber', Session.get('invoiceNumber') + 1);
-    InvoiceTicketsCollection.insert({"invoiceNumber": invoiceNumber, "total": total, "createdAt": date.toISOString()});
+    InvoiceTicketsCollection.insert({"invoiceNumber": invoiceNumber, "total": total, "createdAt": createdAt.toISOString()});
   }
 }
 createTicketsForFirstWeek = function() {
