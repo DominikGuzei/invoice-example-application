@@ -1,2 +1,2 @@
 # Invoice-Example-Application
-Assignment application
+Version 0.1.0 Generate Invoices
