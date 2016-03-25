@@ -3,11 +3,11 @@ Session.setDefault('invoiceNumber', 1); // Bad practice to use a contuious range
 createTickets = function(startDate, days, numberOfTickets) {
   for (var i = 0; i < numberOfTickets; i++) {
     var createdAt = new Date(startDate);
-    createdAt.setDate(createdAt.getDate() + Math.floor(Math.random() * days));
+    createdAt.setDate(createdAt.getDate() - Math.floor(Math.random() * days));
     var total = Math.floor(Math.random() * 20) * 10;
     var invoiceNumber = Session.get('invoiceNumber');
     Session.set('invoiceNumber', Session.get('invoiceNumber') + 1);
-    InvoiceTicketsCollection.insert({"invoiceNumber": invoiceNumber, "total": total, "createdAt": createdAt.toISOString()});
+    InvoiceTicketsCollection.insert({"invoiceNumber": invoiceNumber, "total": total, "createdAt": createdAt});
   }
 }
 createTicketsForFirstWeek = function() {
