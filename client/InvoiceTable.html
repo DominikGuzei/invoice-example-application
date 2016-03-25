@@ -1,9 +1,15 @@
 <template name="InvoiceTable">
   <table>
+    {{#each invoices}}
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      {{> InvoiceTicket}}
     </tr>
+    {{/each}}
   </table>
+</template>
+
+<template name="InvoiceTicket">
+  <td>{{invoiceNumber}}</td>
+  <td>{{total}}</td>
+  <td>{{createdAt}}</td>
 </template>
