@@ -1,5 +1,10 @@
 <template name="InvoiceTable">
   <table>
+    <tr>
+      <td>Invoice Nr.</td>
+      <td>total<button id="total">{{totalButtonText}}</button></td>
+      <td>createdAt<button id="createdAt">{{createdAtButtonText}}</button></td>
+    </tr>
     {{#each invoices}}
     <tr>
       {{> InvoiceTicket}}
