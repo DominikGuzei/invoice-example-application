@@ -1,32 +1,46 @@
-Session.setDefault('createdAtSorting', 1);
-Session.setDefault('totalSorting', 1);
-Session.setDefault('createdAtSortingText', 'Asc');
-Session.setDefault('totalSortingText', 'Asc');
+let sortState = {
+  get: function (queryParam, database) {
+    if (database === true) {
+      return (FlowRouter.getQueryParam(queryParam) || 'Asc') == 'Asc' ? 1 : -1;
+    }
+    else {
+      return (FlowRouter.getQueryParam(queryParam) || 'Asc') == 'Asc' ? 'Desc' : 'Asc';
+    }
+  },
+  toggle: function (queryParam) {
+    let direction = {};
+    direction[queryParam] = (FlowRouter.getQueryParam(queryParam) || 'Asc') == 'Asc' ? 'Desc' : 'Asc';
+    FlowRouter.setQueryParams(direction);
+  }
+};
 
 Template.InvoiceTable.helpers({
   invoices: function () {
     return InvoiceTicketsCollection.find({}, {
       sort: {
-        createdAt: Session.get('createdAtSorting'),
-        total: Session.get('totalSorting')
+        createdAt: sortState.get('sortCreatedAt', true),
+        total: sortState.get('sortTotal', true)
       }
     });
   },
   createdAtButtonText: function () {
-  	return Session.get('createdAtSortingText');
+    return sortState.get('sortCreatedAt');
+    //return (FlowRouter.getQueryParam('sortCreatedAt') || 'Asc') == 'Asc' ? 'Desc' : 'Asc';
   },
   totalButtonText: function () {
-  	return Session.get('totalSortingText');
+    return sortState.get('sortTotal');
+    //return (FlowRouter.getQueryParam('sortTotal') || 'Asc') == 'Asc' ? 'Desc' : 'Asc';
   }
 });
 
 Template.InvoiceTable.events({
   "click #createdAt": function (event) {
-    Session.set('createdAtSorting', Session.get('createdAtSorting') * -1);
-    Session.set('createdAtSortingText', Session.get('createdAtSorting') == 1 ? 'Asc' : 'Desc');
+    sortState.toggle('sortCreatedAt');
+    //FlowRouter.setQueryParams({'sortCreatedAt': (FlowRouter.getQueryParam('sortCreatedAt') || 'Asc') == 'Asc' ? 'Desc' : 'Asc'});
   },
   "click #total": function (event) {
-    Session.set('totalSorting', Session.get('totalSorting') * -1);
-    Session.set('totalSortingText', Session.get('totalSorting') == 1 ? 'Asc' : 'Desc');
+    sortState.toggle('sortTotal');
+    //FlowRouter.setQueryParams({'sortTotal': (FlowRouter.getQueryParam('sortTotal') || 'Asc') == 'Asc' ? 'Desc' : 'Asc'});
   }
 });
+
