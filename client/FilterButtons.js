@@ -15,7 +15,11 @@ Template.FilterButtons.onCreated(function() {
 
 Template.FilterButtons.events({
   'click .timeFrame': function (event) {
+    document.getElementById(FlowRouter.current().params.timeFrame).style.color = 'black';
+    console.log(FlowRouter.current().params.timeFrame);
     redirect(event.currentTarget.id, true);
+    document.getElementById(FlowRouter.current().params.timeFrame).style.color = 'blue';
+    console.log(FlowRouter.current().params.timeFrame);
   }
 });
 
