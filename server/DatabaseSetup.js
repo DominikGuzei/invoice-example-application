@@ -26,9 +26,7 @@ createTicketsForFirstTwoMonths = function() {
 }
 
 Meteor.methods({
-
   'generate-invoices'() {
     createTicketsForFirstTwoMonths();
   }
-
 });
